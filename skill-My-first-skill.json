@@ -1,0 +1,775 @@
+{
+  "intents": [
+    {
+      "intent": "enquiry",
+      "examples": [
+        {
+          "text": "Can you provide me the list of Fresh vegetables?"
+        },
+        {
+          "text": "Can you provide me with the item list"
+        },
+        {
+          "text": "Can you provide the list of Groceries?"
+        },
+        {
+          "text": "What are the offers for today?"
+        },
+        {
+          "text": "what are the special offers"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Greeting",
+      "examples": [
+        {
+          "text": "Good Afternooon"
+        },
+        {
+          "text": "Good Evening"
+        },
+        {
+          "text": "Good Morning"
+        },
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "Hi"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Order",
+      "examples": [
+        {
+          "text": "Can you please take the order"
+        },
+        {
+          "text": "I want to place an order."
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "email",
+      "values": [
+        {
+          "type": "patterns",
+          "value": "emil",
+          "patterns": [
+            "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "enquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "fresh Groceries",
+          "synonyms": [
+            "fresh Groceries"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "fresh vegetables",
+          "synonyms": [
+            "fresh vegetables"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "offers",
+          "synonyms": [
+            "deals",
+            "discounts"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "special items",
+          "synonyms": [
+            "Schemes on Ghee & Oil"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "greetings",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Good Afternoon",
+          "synonyms": [
+            "ga",
+            "Gud aftern"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Good Evening",
+          "synonyms": [
+            "gn",
+            "gud evng"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Good Morning",
+          "synonyms": [
+            "gm",
+            "gud mrng"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "items",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Amul Ghee",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Ashirwad Atta",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "cabbage",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "fresh Spinach",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Olive oil",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Order",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Order",
+          "synonyms": [
+            "buy",
+            "purchase"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "payment",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "card",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "COD",
+          "synonyms": [
+            "Cash On Delivery"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Internet Banking",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "UPI",
+          "synonyms": [
+            "Unified Payment Interface"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "specials",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Amul Ghee",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Olive oil",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Spinach",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_5_1602941747235",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1602944572253",
+      "context": {
+        "number": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_10_1602944572271"
+    },
+    {
+      "type": "event_handler",
+      "parent": "node_5_1602941747235",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1602942796043",
+      "previous_sibling": "node_4_1602945817761"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_4_1602944744925",
+      "context": {
+        "payment": "@payment"
+      },
+      "conditions": "@payment",
+      "event_name": "input",
+      "dialog_node": "handler_4_1602944744956"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "How much quantity?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_5_1602944572253",
+      "event_name": "focus",
+      "dialog_node": "handler_5_1602944572271",
+      "previous_sibling": "handler_10_1602944572271"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "We accept COD, card,UPI.What is your mode of payment?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_4_1602944744925",
+      "event_name": "focus",
+      "dialog_node": "handler_7_1602944744956",
+      "previous_sibling": "handler_4_1602944744956"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_10_1602942797678",
+      "context": {
+        "items": "@items"
+      },
+      "conditions": "@items",
+      "event_name": "input",
+      "dialog_node": "handler_8_1602942797766"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Can you povide me the item you want ? Please check the item list"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_10_1602942797678",
+      "event_name": "focus",
+      "dialog_node": "handler_9_1602942797766",
+      "previous_sibling": "handler_8_1602942797766"
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#enquiry || @enquiry",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_10_1602917747394",
+      "digress_out": "allow_all_never_return",
+      "previous_sibling": "node_7_1602826092500"
+    },
+    {
+      "type": "standard",
+      "title": "specials",
+      "parent": "node_10_1602917747394",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@specials",
+      "dialog_node": "node_3_1602939797827"
+    },
+    {
+      "type": "standard",
+      "title": "Deleting Context",
+      "parent": "node_5_1602941747235",
+      "conditions": "true",
+      "dialog_node": "node_4_1602945817761"
+    },
+    {
+      "type": "frame",
+      "title": "Order",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thank you, Your order of $number of  $items is placed.Please pay your $payment .Your receipt is sent to $email."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "conditions": "#Order && @Order:Order",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_5_1602941747235",
+      "digress_out": "allow_all",
+      "previous_sibling": "node_10_1602917747394",
+      "digress_out_slots": "allow_returning"
+    },
+    {
+      "type": "standard",
+      "title": "Greetings",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Greeting || @greetings",
+      "dialog_node": "node_7_1602826092500",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "email",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "Thank you for giving your email ID $email is used for further references"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "context": {
+        "email": "@email.literal"
+      },
+      "conditions": "@email",
+      "dialog_node": "node_7_1603010491767"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "title": "special iems",
+            "options": [
+              {
+                "label": "Amul Ghee",
+                "value": {
+                  "input": {
+                    "text": "Amul Ghee"
+                  }
+                }
+              },
+              {
+                "label": "Olive oil",
+                "value": {
+                  "input": {
+                    "text": "Olive oil"
+                  }
+                }
+              },
+              {
+                "label": "Spinach",
+                "value": {
+                  "input": {
+                    "text": "Spinach"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_10_1602917747394",
+      "conditions": "@enquiry:(special items)",
+      "dialog_node": "response_1_1602923911837",
+      "previous_sibling": "response_8_1602922062904"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Good Evening"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1602826092500",
+      "conditions": "@greetings:(Good Evening)",
+      "dialog_node": "response_2_1602908978517",
+      "previous_sibling": "response_8_1602908924949"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1602826092500",
+      "conditions": "anything_else",
+      "dialog_node": "response_5_1602909027215",
+      "previous_sibling": "response_2_1602908978517"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "offer for 1kg: Rs.20"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1602939797827",
+      "conditions": "@specials:Spinach",
+      "dialog_node": "response_6_1602940548086",
+      "previous_sibling": "response_8_1602940317723"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "title": "fresh vegetables",
+            "source": "https://2.bp.blogspot.com/-HaK8WIIBhUE/XLWtLMMYbPI/AAAAAAAAArA/Kx7PXX7epYkjS4WJZREmCTwaOSeQvWgZQCLcBGAs/s1600/BeFunky%2BCollage%2B1.jpg",
+            "response_type": "image"
+          }
+        ]
+      },
+      "parent": "node_10_1602917747394",
+      "conditions": "@enquiry:(fresh vegetables)",
+      "dialog_node": "response_7_1602918020744",
+      "previous_sibling": "node_3_1602939797827"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Good Afternoon"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1602826092500",
+      "conditions": "@greetings:(Good Afternoon)",
+      "dialog_node": "response_8_1602908924949",
+      "previous_sibling": "response_9_1602826759497"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTwiDg2WqhzpF-eIO8QpURMWroCu2AJdE5W9g&usqp=CAU",
+            "response_type": "image"
+          }
+        ]
+      },
+      "parent": "node_10_1602917747394",
+      "conditions": "@enquiry:(fresh Groceries)",
+      "dialog_node": "response_8_1602922062904",
+      "previous_sibling": "response_9_1602921389252"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Offer for 1litre: Rs.220"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1602939797827",
+      "conditions": "@specials:(Olive oil)",
+      "dialog_node": "response_8_1602940317723",
+      "previous_sibling": "response_9_1602940136125"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "good morning"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1602826092500",
+      "conditions": "@greetings:(Good Morning)",
+      "dialog_node": "response_9_1602826759497"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "we are having 20% discount on Oil and Ghee\n"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "We are having 10% discount on leafy vegetables"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1602917747394",
+      "conditions": "@enquiry:offers",
+      "dialog_node": "response_9_1602921389252",
+      "previous_sibling": "response_7_1602918020744"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "offer for 1kg  : Rs.415"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1602939797827",
+      "conditions": "@specials:(Amul Ghee)",
+      "dialog_node": "response_9_1602940136125"
+    },
+    {
+      "type": "slot",
+      "parent": "node_5_1602941747235",
+      "variable": "$items",
+      "dialog_node": "slot_10_1602942797678",
+      "previous_sibling": "handler_1_1602942796043"
+    },
+    {
+      "type": "slot",
+      "parent": "node_5_1602941747235",
+      "variable": "$payment",
+      "dialog_node": "slot_4_1602944744925",
+      "previous_sibling": "slot_5_1602944572253"
+    },
+    {
+      "type": "slot",
+      "parent": "node_5_1602941747235",
+      "variable": "$number",
+      "dialog_node": "slot_5_1602944572253",
+      "previous_sibling": "slot_10_1602942797678"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. I am Daily needs bot,capable of showing fresh vegetables and Groceries .Always at your service ,How may I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "Can you please give your name and mail ID?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
